@@ -1,5 +1,16 @@
 from agents.temperature.weather1 import agent as weather_alert
-from uagents import Bureau
+from messages.weather1 import TEMPRequest
+from messages.general import UAgentResponse
+from uagents import Bureau,Agent, Context
+
+temp_request = TEMPRequest(location="new york",min_threshold_temperature= 10 ,max_threshold_temperature = 40)
+@weather_alert.on_interval(period=3600)
+async def send_message(ctx: Context):
+    await ctx.send("agent1qvjflcz3t00rym9qkpdvsd9fq6qnxvvxhdx87dhqwvp3vnk4wela2y907ft", temp_request)
+
+@weather_alert.on_message(model=UAgentResponse)
+async def message_handler(ctx: Context, _: str, msg: UAgentResponse):
+    ctx.logger.info(f"{msg.options}")
 
 if __name__ == "__main__":
     bureau = Bureau(endpoint="http://127.0.0.1:8000/submit", port=8000)
