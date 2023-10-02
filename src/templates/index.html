@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Alert Input</title>
+</head>
+<body>
+    <form action="/process_input" method="post">
+        Location: <input type="text" name="location"><br>
+        Min Threshold Temperature: <input type="text" name="min_temp"><br>
+        Max Threshold Temperature: <input type="text" name="max_temp"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+        <!-- Display notifications here -->
+        <div id="notifications"></div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.6/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://' + document.domain + ':' + location.port);
+            
+            socket.on('connect', function() {
+                console.log('Connected to server');
+            });
+    
+            socket.on('weather_alert', function(data) {
+                socket.on('weather_alert', function(data) {
+                    // Update UI with weather alert data
+                    var notificationsDiv = document.getElementById('notifications');
+                    notificationsDiv.innerHTML += '<div>' + data + '</div>';
+
+            });
+    
+            // Handle form submission to send temperature thresholds
+            document.getElementById('threshold-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var minTemp = document.getElementById('min-temp-input').value;
+                var maxTemp = document.getElementById('max-temp-input').value;
+                
+                // Send temperature thresholds to the server
+                socket.emit('weather_alert', { min_temp: minTemp, max_temp: maxTemp });
+            });
+        </script>
+</body>
+</html>
