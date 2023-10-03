@@ -1,9 +1,9 @@
-from agents.temperature.weather1 import agent as weather_alert
-from messages.weather1 import TEMPRequest
+from agents.temperature.agent_weather import agent as weather_alert
+from messages.agent_weather import TEMPRequest
 from messages.general import UAgentResponse
 from uagents import Bureau,Agent, Context
 
-temp_request = TEMPRequest(location="new york",min_threshold_temperature= 10 ,max_threshold_temperature = 40)
+temp_request = TEMPRequest(location="mumbai",min_threshold_temperature= 25 ,max_threshold_temperature = 28)
 @weather_alert.on_interval(period=3600)
 async def send_message(ctx: Context):
     await ctx.send("agent1qvjflcz3t00rym9qkpdvsd9fq6qnxvvxhdx87dhqwvp3vnk4wela2y907ft", temp_request)
