@@ -15,18 +15,7 @@ agent = Agent(
     name="weather_alert",
     seed="temperature alert"
 )
-
-def get_weather(location: str):
-    url_current = url_current = f'http://api.weatherstack.com/current?access_key={access_key}&query={location}'
-    response = requests.get(url_current)
-    if response.status_code == 200:
-        weather_data = response.json()
-        temperature = weather_data['current']['temperature']
-        return temperature
-    else:
-        print(f"Error: Unable to retrieve weather data. Status code: {response.status_code}")
-        return None
-    
+ 
 weather_protocol = Protocol("weather")
 
 
