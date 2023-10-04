@@ -59,4 +59,4 @@ python main.py
 Now we have the temperature alert agent running, we will get the notifications in a timely duration. 🎉
 
 ### Submission for HackAI:  
-Team: Vaishnavi Sarmalakar, Prerna Chedda, Manish Patil, Rohit Wahwal
+Team: Vaishnavi Sarmalkar, Prerna Chheda, Manish Patil, Rohit Wahwal
