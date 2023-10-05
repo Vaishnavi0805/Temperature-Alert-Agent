@@ -34,15 +34,17 @@ async def weather(ctx: Context, sender: str, msg: TEMPRequest):
             print(f"Error: Unable to retrieve weather data. Status code: {response.status_code}")
             return None
     ctx.logger.info(f"Received message from {sender}")
+    COLOR_RED = '\033[91m'
+    COLOR_GREEN = '\033[92m'
     try:
         temperature = get_weather(msg.location)
         # request_id = str(uuid.uuid4())
         if temperature < msg.min_threshold_temperature:
-            result=f'Temperature is below {msg.min_threshold_temperature}°C'
+            result=f'{COLOR_RED}  Temperature is below {msg.min_threshold_temperature}°C  {COLOR_RED}'
         elif temperature >msg.max_threshold_temperature:
-            result=f'Temperature is above {msg.max_threshold_temperature}°C'
+            result=f'{COLOR_RED} Temperature is above {msg.max_threshold_temperature}°C  {COLOR_RED}'
         else:
-            result=f'Temperature in {location}: {temperature}°C'
+            result=f'{COLOR_GREEN} Temperature in {location}: {temperature}°C  {COLOR_GREEN}'
         print(result)
        
         await ctx.send(
